@@ -118,4 +118,5 @@ class Rectangle
   end
 end
 
+# Comment this to see "true" test coverage (all non-display is covered but... can't be trusted)
 Rectangle.demo_parcours
