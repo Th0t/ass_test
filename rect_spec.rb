@@ -1,6 +1,6 @@
 require_relative 'rect.rb'
 
-describe 'Rect' do
+describe Rectangle do
   it "should be true" do
     expect(true).to be(true)
   end
