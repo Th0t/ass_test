@@ -29,6 +29,7 @@ class Rectangle
       end
       @output << line
     end
+    @output
   end
 
   def draw_payload
