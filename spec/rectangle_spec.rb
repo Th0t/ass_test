@@ -18,13 +18,13 @@ shared_examples "a rectangle" do
   context 'single column' do
     let(:x) { 1 }
     let(:y) { 3 }
-    # it 'returns 3 lines' do
-    #   if reverse_last_angles
-    #     expect(@subject.make_payload).to eq([left_angle_caracter, border_caracter, right_angle_caracter])
-    #   else
-    #     expect(@subject.make_payload).to eq([left_angle_caracter, border_caracter, left_angle_caracter])
-    #   end
-    # end
+    it 'returns 3 lines' do
+      if reverse_last_angles
+        expect(@subject.make_payload).to eq([left_angle_caracter, border_caracter, right_angle_caracter])
+      else
+        expect(@subject.make_payload).to eq([left_angle_caracter, border_caracter, left_angle_caracter])
+      end
+    end
   end
   context 'square matrix' do
     let(:x) { 3 }

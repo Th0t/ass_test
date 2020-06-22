@@ -118,5 +118,5 @@ class Rectangle
   end
 end
 
-# Comment this to see "true" test coverage (all non-display is covered but... can't be trusted)
+# Comment this to see "true" test coverage (all non-display is covered except guards)
 Rectangle.demo_parcours

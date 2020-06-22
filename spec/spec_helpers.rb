@@ -1,6 +1,4 @@
-require 'simplecov'
-
-SimpleCov.start
+require 'deep-cover'
 
 require_relative '../rectangle'
 
