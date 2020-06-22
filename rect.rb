@@ -1,16 +1,21 @@
 class Rectangle
   def initialize(x, y, la, ra, bc, mc, reverse_last_angles)
-    @x = x
-    @y = y
-    @la = la
-    @ra = ra
-    @bc = bc
-    @mc = mc
+    @x = x; @y = y
+    raise 'Exepecting dimensions as Integer' unless @x.is_a?(Integer) || @y.is_a?(Integer)
+
+    @la = la; @ra = ra; @bc = bc; @mc = mc
+    raise 'Exepecting single caracters' unless @la.is_a?(String) || @ra.is_a?(String) || @bc.is_a?(String) || @mc.is_a?(String)
+    raise 'Exepecting single caracters' unless @la.size == 1 || @ra.size == 1 || @bc.size == 1 || @mc.size == 1
+
     @reverse_last_angles = reverse_last_angles
+    raise 'Expecting reverse_last_angles to be a boolean' unless !!@reverse_last_angles == @reverse_last_angles
+
     @output = []
   end
 
   def make_payload
+    return if @x.zero? || @y.zero?
+
     @y.times do |index|
       if first_line?(index)
         @output << make_first_line
@@ -41,17 +46,18 @@ class Rectangle
   def make_middle_line
     line = @mc * @x
     line[0] = @bc
-    line[-1] = @bc unless @x == 1
+    line[-1] = @bc
     line
   end
 
   def make_last_line
     line = @bc * @x
-    line[0] = @la
-    line[-1] = @ra unless @x == 1
     if @reverse_last_angles
       line[0] = @ra
       line[-1] = @la unless @x == 1
+    else
+      line[0] = @la
+      line[-1] = @ra unless @x == 1
     end
     line
   end
