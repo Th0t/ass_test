@@ -11,25 +11,49 @@ class Rectangle
   end
 
   def make_payload
-    return @output << @la if (@x == 1 && @y == 1)
-
     @y.times do |index|
-      if index == 0 || index == @y-1
-        line = @bc * @x
-        line[0] = @la
-        line[-1] = @ra unless @x == 1
-        if @reverse_last_angles && index == @y-1 && @y != 1
-          line[0] = @ra
-          line[-1] = @la unless @x == 1
-        end
+      if first_line?(index)
+        @output << make_first_line
+      elsif last_line?(index)
+        @output << make_last_line
       else
-        line = @mc * @x
-        line[0] = @bc
-        line[-1] = @bc unless @x == 1
+        @output << make_middle_line
       end
-      @output << line
     end
     @output
+  end
+
+  def first_line?(index)
+    index == 0 ? true : false
+  end
+
+  def last_line?(index)
+    index == @y-1 ? true : false
+  end
+
+  def make_first_line
+    line = @bc * @x
+    line[0] = @la
+    line[-1] = @ra unless @x == 1
+    line
+  end
+
+  def make_middle_line
+    line = @mc * @x
+    line[0] = @bc
+    line[-1] = @bc unless @x == 1
+    line
+  end
+
+  def make_last_line
+    line = @bc * @x
+    line[0] = @la
+    line[-1] = @ra unless @x == 1
+    if @reverse_last_angles
+      line[0] = @ra
+      line[-1] = @la unless @x == 1
+    end
+    line
   end
 
   def draw_payload
@@ -41,6 +65,7 @@ class Rectangle
   end
 
   def self.demo_parcours
+    puts 'XXXXXXXXXXXX'
     puts '------------'
     Rectangle.new(5, 4, 'o', 'o', '-', ' ', false).draw_payload
     puts '------------'
